@@ -1,0 +1,20 @@
+# Git Ignore
+
+
+# macOS
+.DS_Store
+*.zip
+
+
+# outputs
+simulation_ouput/
+
+
+# python cache
+**/__pycache__/
+
+
+# any images
+**/*.png
+
+
