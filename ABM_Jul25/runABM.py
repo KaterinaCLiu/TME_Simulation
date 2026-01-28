@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 """
 Enhanced ABM runner with detailed step-by-step output and monitoring.
@@ -421,7 +420,11 @@ def plot_cytokine_concentrations(model, output_dir="simulation_output"):
             
             # Use log scale for better visualization if values span many orders of magnitude
             signal_max = np.max(signal_grid)
-            signal_min = np.max([np.min(signal_grid[signal_grid > 0]), signal_max * 1e-10])
+            positive_vals = signal_grid[signal_grid > 0]
+            if positive_vals.size == 0:
+                signal_min = signal_max * 1e-10
+            else:
+                signal_min = np.max([np.min(positive_vals), signal_max * 1e-10])
             
             if signal_max > 0:
                 # Use log-normalized colormap if there's significant range
