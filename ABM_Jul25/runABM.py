@@ -692,7 +692,7 @@ def plot_results_from_csv(csv_file="simulation_output/cell_counts.csv"):
         plt.grid(True, alpha=0.3)
         
         plt.tight_layout()
-        plt.savefig('simulation_results.png', dpi=300, bbox_inches='tight')
+        plt.savefig('simulation_output/simulation_results.png', dpi=300, bbox_inches='tight')
         plt.show()
         
     except ImportError:
