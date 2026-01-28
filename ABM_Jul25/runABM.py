@@ -575,68 +575,6 @@ def plot_summary_dashboard(model, output_dir="simulation_output"):
                 dpi=300, bbox_inches='tight')
     
     return fig
-    """Plot results from saved CSV data."""
-    try:
-        import pandas as pd
-        csv_file="simulation_output/cell_counts.csv"
-        df = pd.read_csv(csv_file)
-        
-        plt.figure(figsize=(15, 10))
-        
-        # Cancer cells subplot
-        plt.subplot(2, 2, 1)
-        plt.plot(df['Step'], df['Cancer_Stem'], 'g-', label='Stem', linewidth=2)
-        plt.plot(df['Step'], df['Cancer_Prog'], 'orange', label='Progenitor', linewidth=2)
-        plt.plot(df['Step'], df['Cancer_Senes'], 'r-', label='Senescent', linewidth=2)
-        plt.xlabel('Step')
-        plt.ylabel('Cell Count')
-        plt.title('Cancer Cell Populations')
-        plt.legend()
-        plt.grid(True, alpha=0.3)
-        
-        # Immune cells subplot
-        plt.subplot(2, 2, 2)
-        plt.plot(df['Step'], df['CD8'], 'b-', label='CD8+ T', linewidth=2)
-        plt.plot(df['Step'], df['CD4_Helper'], 'purple', label='CD4+ Helper', linewidth=2)
-        plt.plot(df['Step'], df['CD4_Treg'], 'pink', label='CD4+ Treg', linewidth=2)
-        plt.xlabel('Step')
-        plt.ylabel('Cell Count')
-        plt.title('T Cell Populations')
-        plt.legend()
-        plt.grid(True, alpha=0.3)
-        
-        # Myeloid cells subplot
-        plt.subplot(2, 2, 3)
-        plt.plot(df['Step'], df['M1'], 'cyan', label='M1 Macrophage', linewidth=2)
-        plt.plot(df['Step'], df['M2'], 'magenta', label='M2 Macrophage', linewidth=2)
-        plt.plot(df['Step'], df['MDSC'], 'gray', label='MDSC', linewidth=2)
-        plt.xlabel('Step')
-        plt.ylabel('Cell Count')
-        plt.title('Myeloid Cell Populations')
-        plt.legend()
-        plt.grid(True, alpha=0.3)
-        
-        # Total populations subplot
-        plt.subplot(2, 2, 4)
-        total_cancer = df['Cancer_Stem'] + df['Cancer_Prog'] + df['Cancer_Senes']
-        total_immune = df['CD8'] + df['CD4_Helper'] + df['CD4_Treg'] + df['M1'] + df['M2'] + df['MDSC']
-        plt.plot(df['Step'], total_cancer, 'red', label='Total Cancer', linewidth=3)
-        plt.plot(df['Step'], total_immune, 'blue', label='Total Immune', linewidth=3)
-        plt.xlabel('Step')
-        plt.ylabel('Cell Count')
-        plt.title('Cancer vs Immune Populations')
-        plt.legend()
-        plt.grid(True, alpha=0.3)
-        
-        plt.tight_layout()
-        plt.savefig('simulation_results.png', dpi=300, bbox_inches='tight')
-        plt.show()
-        
-    except ImportError:
-        print("pandas not available for plotting CSV data")
-    except FileNotFoundError:
-        print(f"CSV file {csv_file} not found")
-
 
 def plot_results_from_csv(csv_file="simulation_output/cell_counts.csv"):
     """Plot results from saved CSV data."""
