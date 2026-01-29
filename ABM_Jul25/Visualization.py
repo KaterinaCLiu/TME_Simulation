@@ -6,16 +6,17 @@ import matplotlib.colors as mcolors
 import seaborn as sns
 import numpy as np
 import random
+import os
 
-from agents import (
+from .agents import (
     CancerCell, CancerSubtype,
     CD8TCell,
     CD4TCell, CD4TSubtype,
     MDSC,
     Macrophage, MacSubtype
 )
-from model import ABM_Model
-import params as P
+from .model import ABM_Model
+from . import params as P
 
 
 # Visualization functions
@@ -181,6 +182,9 @@ if __name__ == "__main__":
     np.random.seed(42)
     random.seed(42)
 
+    if not os.path.exists("visualization_output"):
+        os.makedirs("visualization_output")
+
     steps = 100
     width = 30
     height = 30
@@ -189,7 +193,7 @@ if __name__ == "__main__":
         steps=100,
         width=30,
         height=30,
-        initial_tumor_cells=100,
+        initial_tumor_cells=80,
         initial_CD8Tcells=20,
         initial_CD4Tcells=30,
         initial_macrophages=30,
@@ -200,12 +204,12 @@ if __name__ == "__main__":
 
     # Plot 1: Cell counts over time
     plot_cell_counts(model, steps)
-    plt.savefig("cell_counts.png")
+    plt.savefig("visualization_output/cell_counts.png")
     plt.close()
 
     # Plot 2: Final grid state
     plot_grid(model)
-    plt.savefig("final_grid.png")
+    plt.savefig("visualization_output/final_grid.png")
     plt.close()
 
     # Plot 3: Signal distributions (all fields in model)
@@ -227,7 +231,7 @@ if __name__ == "__main__":
             ax.set_yticks([])
 
     plt.tight_layout()
-    plt.savefig("signal_distributions.png")
+    plt.savefig("visualization_output/signal_distributions.png")
     plt.close()
 
     # Print final statistics
